@@ -5,7 +5,7 @@ import androidx.room.Room
 import capps.lecturetime.room.LectureDatabase
 import capps.lecturetime.room.LectureRepository
 import capps.lecturetime.room.LectureRepositoryImpl
-import capps.lecturetime.room.NewLectureDao
+import capps.lecturetime.room.LectureDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,8 +19,8 @@ object ViewModelModule {
 
     @Provides
     @Singleton
-    fun provideDao(lectureDatabase: LectureDatabase): NewLectureDao {
-        return lectureDatabase.newLectureDao()
+    fun provideDao(lectureDatabase: LectureDatabase): LectureDao {
+        return lectureDatabase.lectureDao()
     }
 
     @Provides

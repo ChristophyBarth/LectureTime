@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.util.UUID
 
 @Entity(tableName = "lectures")
-data class NewLecture(
+data class Lecture(
     @PrimaryKey var id: Long = 0,
     @ColumnInfo(name = "uIds") var uIds: List<UUID>? = null,
     @ColumnInfo(name = "courseCode") var courseCode: String,

@@ -22,7 +22,7 @@ import capps.lecturetime.AddLectureViewModel
 import capps.lecturetime.R
 import capps.lecturetime.utils.Resource
 import capps.lecturetime.databinding.FragmentAddLectureBinding
-import capps.lecturetime.model.NewLecture
+import capps.lecturetime.model.Lecture
 import com.google.gson.Gson
 import java.util.*
 
@@ -67,12 +67,33 @@ class AddLectureFragment : Fragment() {
 
         workManager = WorkManager.getInstance(requireContext())
 
-        courseCodeData = mutableListOf("COM 111", "GNS 123", "EED 232", "COM 142")
-        courseCodeData = courseCodeData.sorted().toMutableList()
+        courseCodeData = mutableListOf(
+            "COM 121",
+            "COM 122",
+            "COM 123",
+            "COM 124",
+            "COM 125",
+            "COM 126",
+            "EED 126",
+            "GNS 228",
+            "GNS 102",
+            "GNS 128"
+        )
+        /*courseCodeData = courseCodeData.sorted().toMutableList()*/
         courseCodeData.add(0, "select course code")
 
-        courseTitleData = mutableListOf("COM 111 title", "GNS 123 title", "EED 232 title", "COM 142 title")
-        courseTitleData = courseTitleData.sorted().toMutableList()
+        courseTitleData = mutableListOf(
+            "Programming using C language",
+            "Introduction to internet",
+            "Programming language using Java 1",
+            "Data structure & algorithms",
+            "Introduction to system analysis & design",
+            "PC upgrade & maintenance",
+            "Practice of entrepreneurship",
+            "Research methods",
+            "Communication in English",
+            "Citizenship education II"
+        )
         courseTitleData.add(0, "select course title")
 
         val courseCodeAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, courseCodeData)
@@ -102,7 +123,7 @@ class AddLectureFragment : Fragment() {
         if (args.lectureJsonString != "null") {
             Log.i(TAG, "onViewCreated: ${args.lectureJsonString}")
 
-            val lecture = Gson().fromJson(args.lectureJsonString, NewLecture::class.java)
+            val lecture = Gson().fromJson(args.lectureJsonString, Lecture::class.java)
             id = lecture.id
             uuids = lecture.uIds
 

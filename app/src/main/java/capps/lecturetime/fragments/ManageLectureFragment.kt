@@ -22,7 +22,7 @@ import capps.lecturetime.AddLectureViewModel
 import capps.lecturetime.R
 import capps.lecturetime.adapters.LectureAdapter
 import capps.lecturetime.databinding.FragmentManageLectureBinding
-import capps.lecturetime.model.NewLecture
+import capps.lecturetime.model.Lecture
 import capps.lecturetime.utils.Resource
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -57,8 +57,13 @@ class ManageLectureFragment : Fragment() {
         viewModel.getLectures()
         viewModel.lectureList.observe(viewLifecycleOwner) { lectureList ->
 
-            adapter = LectureAdapter(lectureList, requireContext(), object : LectureAdapter.Listener {
-                override fun deleteLecture(lecture: NewLecture) {
+            val sortedList = lectureList.sortedWith(compareBy({ it.days.minOrNull() },
+                { it.startTime.first },
+                { it.startTime.second })
+            )
+
+            adapter = LectureAdapter(sortedList, requireContext(), object : LectureAdapter.Listener {
+                override fun deleteLecture(lecture: Lecture) {
                     for (uuid in lecture.uIds!!) {
                         WorkManager.getInstance(requireContext()).cancelWorkById(uuid)
                     }
@@ -142,6 +147,7 @@ class ManageLectureFragment : Fragment() {
         val materialAlertDialogBuilder = MaterialAlertDialogBuilder(requireContext()).apply {
             setView(R.layout.dialog_progress)
             setMessage(message)
+            setCancelable(false)
         }
 
         loadingMaterialAlertDialog = materialAlertDialogBuilder.create()
