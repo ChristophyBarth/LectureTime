@@ -1,19 +1,19 @@
 package capps.lecturetime.room
 
-import capps.lecturetime.model.NewLecture
+import capps.lecturetime.model.Lecture
 import javax.inject.Inject
 
-class LectureRepositoryImpl @Inject constructor(private val lectureDao: NewLectureDao) : LectureRepository {
+class LectureRepositoryImpl @Inject constructor(private val lectureDao: LectureDao) : LectureRepository {
 
-    override suspend fun insert(lecture: NewLecture): Long {
+    override suspend fun insert(lecture: Lecture): Long {
         return lectureDao.insertLecture(lecture)
     }
 
-    override suspend fun update(lecture: NewLecture): Int {
+    override suspend fun update(lecture: Lecture): Int {
         return lectureDao.updateLecture(lecture)
     }
 
-    override suspend fun getLecture(roomId: Long): NewLecture? {
+    override suspend fun getLecture(roomId: Long): Lecture? {
         return lectureDao.getLectureById(roomId)
     }
 
@@ -21,11 +21,11 @@ class LectureRepositoryImpl @Inject constructor(private val lectureDao: NewLectu
         return lectureDao.deleteAll()
     }
 
-    override suspend fun delete(lecture: NewLecture): Int {
+    override suspend fun delete(lecture: Lecture): Int {
         return lectureDao.deleteLecture(lecture)
     }
 
-    override fun getAllLectures(): List<NewLecture> {
+    override fun getAllLectures(): List<Lecture> {
         return lectureDao.getAllLectures()
     }
 }

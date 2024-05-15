@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.work.*
 import capps.lecturetime.utils.Utils.dateFormatter
 import capps.lecturetime.utils.Utils.millisUntilNextTime
-import capps.lecturetime.model.NewLecture
+import capps.lecturetime.model.Lecture
 import capps.lecturetime.room.LectureRepository
 import capps.lecturetime.utils.Event
 import capps.lecturetime.utils.Resource
@@ -28,8 +28,8 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
         const val TAG = "AddLectureViewModel"
     }
 
-    private val _lectureList = MutableLiveData<List<NewLecture>>(mutableListOf())
-    val lectureList: LiveData<List<NewLecture>> get() = _lectureList
+    private val _lectureList = MutableLiveData<List<Lecture>>(mutableListOf())
+    val lectureList: LiveData<List<Lecture>> get() = _lectureList
 
     private val _loadingResource = MutableLiveData<Event<Resource<String>>>()
     val loadingResource: LiveData<Event<Resource<String>>> get() = _loadingResource
@@ -54,7 +54,7 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
     )
     val oneTimeWorkRequests: LiveData<Event<MutableList<Pair<String, OneTimeWorkRequest>>>> get() = _oneTimeWorkRequests
 
-    private val newLecture = MutableLiveData<NewLecture?>()
+    private val lecture = MutableLiveData<Lecture?>()
 
     fun getLectures() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -78,7 +78,7 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
         val uniqueWorkID = id ?: abs(UUID.randomUUID().hashCode().toLong())
         if (id != null) _cancelPreviousWork.value = Event(uuids)
 
-        val newLecture = NewLecture(
+        val lecture = Lecture(
             id = uniqueWorkID,
             courseCode = courseCode,
             courseTitle = courseTitle,
@@ -94,7 +94,7 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
                 .setRequiresBatteryNotLow(false).build()
 
         val uIds = mutableListOf<UUID>()
-        if (newLecture.repeatable) {
+        if (lecture.repeatable) {
             val requests = mutableListOf<Pair<String, PeriodicWorkRequest>>()
             for (day in days) {
                 val initialDelay = millisUntilNextTime(day, startTime.first, startTime.second)
@@ -108,8 +108,8 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
                 val uid = UUID.randomUUID()
                 uIds.add(uid)
 
-                val inputData = Data.Builder().putString("title", newLecture.courseCode)
-                    .putString("message", "You have ${newLecture.courseTitle} lecture now")
+                val inputData = Data.Builder().putString("title", lecture.courseCode)
+                    .putString("message", "You have ${lecture.courseTitle} lecture now")
                     .putLong("roomId", uniqueWorkID).putBoolean("repeatable", repeatable).build()
 
                 val notificationRequest =
@@ -123,8 +123,8 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
                 )
             }
 
-            newLecture.uIds = uIds
-            this.newLecture.value = newLecture
+            lecture.uIds = uIds
+            this.lecture.value = lecture
 
             _periodicWorkRequests.value = Event(requests)
         } else {
@@ -135,8 +135,8 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
                 val uid = UUID.randomUUID()
                 uIds.add(uid)
 
-                val inputData = Data.Builder().putString("title", newLecture.courseCode)
-                    .putString("message", "You have ${newLecture.courseTitle} lecture now")
+                val inputData = Data.Builder().putString("title", lecture.courseCode)
+                    .putString("message", "You have ${lecture.courseTitle} lecture now")
                     .putLong("roomId", uniqueWorkID).putBoolean("repeatable", repeatable).build()
 
                 val notificationRequest =
@@ -150,8 +150,8 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
                 )
             }
 
-            newLecture.uIds = uIds
-            this.newLecture.value = newLecture
+            lecture.uIds = uIds
+            this.lecture.value = lecture
 
             _oneTimeWorkRequests.value = Event(requests)
         }
@@ -159,10 +159,10 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
 
     fun saveLecture() {
         viewModelScope.launch(Dispatchers.IO) {
-            val value = lectureRepository.insert(newLecture.value!!)
+            val value = lectureRepository.insert(lecture.value!!)
 
             if (value > 0) {
-                newLecture.postValue(null)
+                lecture.postValue(null)
                 _loadingResource.postValue(Event(Resource.Success("Lecture added successfully!")))
             } else {
                 _loadingResource.postValue(Event(Resource.Error("Error: Couldn't add this lecture")))
@@ -170,7 +170,7 @@ class AddLectureViewModel @Inject constructor(private val lectureRepository: Lec
         }
     }
 
-    fun deletingSpecificLecture(lecture: NewLecture) {
+    fun deletingSpecificLecture(lecture: Lecture) {
         _deletingSpecificLectureResource.postValue(Event(Resource.Loading("Deleting...")))
 
         viewModelScope.launch(Dispatchers.IO) {

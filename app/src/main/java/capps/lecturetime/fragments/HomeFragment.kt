@@ -51,10 +51,6 @@ class HomeFragment : Fragment() {
                     val completedDate = Calendar.getInstance()
                     completedDate.timeInMillis = it.completedTime
 
-                    Log.e(TAG, "onViewCreated: year ${completedDate.get(Calendar.YEAR)}")
-                    Log.e(TAG, "onViewCreated: month ${completedDate.get(Calendar.MONTH)}")
-                    Log.e(TAG, "onViewCreated: day ${completedDate.get(Calendar.DAY_OF_WEEK)}")
-
                     completedDate.get(Calendar.YEAR) == now.get(Calendar.YEAR) && completedDate.get(Calendar.MONTH) == now.get(
                         Calendar.MONTH
                     ) && completedDate.get(Calendar.DAY_OF_WEEK) == now.get(Calendar.DAY_OF_WEEK)
@@ -89,6 +85,7 @@ class HomeFragment : Fragment() {
 
         binding.reload.setOnClickListener {
             Toast.makeText(requireContext(), "Reloading...", Toast.LENGTH_SHORT).show()
+            Log.i(TAG, "onViewCreated: Reloading...")
             viewModel.getLectures()
         }
     }

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import capps.lecturetime.R
 import capps.lecturetime.databinding.LectureItemBinding
 import capps.lecturetime.fragments.ManageLectureFragmentDirections
-import capps.lecturetime.model.NewLecture
+import capps.lecturetime.model.Lecture
 import capps.lecturetime.utils.Utils.formatTime
 import capps.lecturetime.utils.Utils.getDays
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -24,18 +24,18 @@ import com.google.gson.Gson
 import java.util.*
 
 class LectureAdapter(
-    private val lectures: List<NewLecture>,
+    private val lectures: List<Lecture>,
     private val context: Context,
     private val listener: Listener?,
     private val isManageLectureFragment: Boolean
 ) : RecyclerView.Adapter<LectureAdapter.LectureAdapterViewHolder>() {
 
     interface Listener {
-        fun deleteLecture(lecture: NewLecture)
+        fun deleteLecture(lecture: Lecture)
     }
 
     inner class LectureAdapterViewHolder(private val binding: LectureItemBinding) : ViewHolder(binding.root) {
-        fun bind(lecture: NewLecture) {
+        fun bind(lecture: Lecture) {
             binding.courseCode.text = lecture.courseCode
             binding.courseTitle.text = lecture.courseTitle
 

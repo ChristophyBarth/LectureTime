@@ -1,17 +1,17 @@
 package capps.lecturetime.room
 
-import capps.lecturetime.model.NewLecture
+import capps.lecturetime.model.Lecture
 
 interface LectureRepository {
-    suspend fun insert(lecture: NewLecture): Long
+    suspend fun insert(lecture: Lecture): Long
 
-    suspend fun update(lecture: NewLecture): Int
+    suspend fun update(lecture: Lecture): Int
 
-    suspend fun getLecture(roomId: Long): NewLecture?
+    suspend fun getLecture(roomId: Long): Lecture?
 
-    suspend fun delete(lecture: NewLecture): Int
+    suspend fun delete(lecture: Lecture): Int
 
-    fun getAllLectures(): List<NewLecture>
+    fun getAllLectures(): List<Lecture>
 
     suspend fun deleteAll(): Int
 }

@@ -54,7 +54,7 @@ class NotificationWorker(private val context: Context, workerParams: WorkerParam
             applicationContext, LectureDatabase::class.java, "lecture_database"
         ).build()
 
-        val dao = database.newLectureDao()
+        val dao = database.lectureDao()
 
         val lecture = dao.getLectureById(roomId)
 
@@ -97,7 +97,7 @@ class NotificationWorker(private val context: Context, workerParams: WorkerParam
         notificationManager.createNotificationChannel(channel)
 
 
-        return Notification.Builder(applicationContext, CHANNEL_ID).setSmallIcon(R.drawable.ic_plus)
+        return Notification.Builder(applicationContext, CHANNEL_ID).setSmallIcon(R.mipmap.ic_launcher_foreground)
             .setContentTitle(title).setContentText(message).build()
     }
 
