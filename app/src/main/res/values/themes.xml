@@ -1,0 +1,60 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.LectureTime" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/my_light_primary</item>
+    </style>
+
+    <style name="Theme.LectureTime" parent="Base.Theme.LectureTime" />
+
+    <style name="fab_rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="AlertDialogPermissionsTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveAlertDialogPermissionsStyle</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Custom.Corners</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="PositiveAlertDialogPermissionsStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/my_light_primary</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:width">175dp</item>
+        <item name="cornerRadius">25dp</item>
+    </style>
+
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveAlertDialogButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeAlertDialogButtonStyle</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Custom.Corners</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Custom.Corners" parent="">
+        <!-- Adjust corner radius as needed -->
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="PositiveAlertDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/my_light_primary</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:width">100dp</item>
+        <item name="cornerRadius">25dp</item>
+    </style>
+
+    <style name="NegativeAlertDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/my_light_primary</item>
+        <item name="backgroundTint">@color/lighter_shade_my_light_primary</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:width">100dp</item>
+        <item name="cornerRadius">25dp</item>
+    </style>
+
+</resources>

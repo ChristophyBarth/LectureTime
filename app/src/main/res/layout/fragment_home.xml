@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/toolbar"
+            android:background="?colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:layout_gravity="start"
+                android:text="@string/app_name"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_list"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="10dp"
+                android:id="@+id/list_button"
+                android:contentDescription="@string/allLecturesButton" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_reload"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="12.5dp"
+                android:id="@+id/reload"
+                android:contentDescription="@string/refreshButton" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardView"
+            android:layout_below="@id/toolbar"
+            android:layout_margin="20dp"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Tuesday, 3rd May 2024"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:padding="15dp" />
+
+                <TextView
+                    android:id="@+id/lecture_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="You have 10 lectures today."
+                    android:textSize="14sp"
+                    android:padding="15dp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/today_s_lectures"
+            android:layout_below="@id/cardView"
+            android:layout_marginTop="10dp"
+            android:id="@+id/today_lecture_txt"
+            android:layout_marginHorizontal="20dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerview_cardView"
+            android:layout_below="@id/today_lecture_txt"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/lecture_item" />
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fab"
+        app:layout_anchorGravity="bottom|end"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/recyclerview_cardView"
+        android:contentDescription="@string/add_new_lecture"
+        app:tint="@android:color/white"
+        app:elevation="10dp"
+        android:src="@drawable/ic_plus"
+        app:maxImageSize="40dp"
+        android:backgroundTint="?colorPrimary"
+        app:shapeAppearanceOverlay="@style/fab_rounded" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

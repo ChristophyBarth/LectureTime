@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="10dp"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="7.5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:id="@+id/course_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="COM 113"
+                android:textSize="15sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/repetition"/>
+
+            <ImageView
+                android:id="@+id/repetition"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_repeat"
+                app:layout_constraintTop_toTopOf="@id/course_code"
+                app:layout_constraintBottom_toBottomOf="@id/course_code"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:contentDescription="@string/repetition_icon" />
+
+            <TextView
+                android:id="@+id/course_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="COM 113"
+                android:textSize="13sp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toBottomOf="@id/course_code"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/course_days"/>
+
+            <TextView
+                android:id="@+id/course_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="M, T, W, TH, F, S, SU"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                app:layout_constraintTop_toBottomOf="@id/course_code"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/course_title"/>
+
+            <TextView
+                android:id="@+id/course_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="08:00 - 10:00"
+                android:textSize="13sp"
+                app:layout_constraintTop_toBottomOf="@id/space"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>

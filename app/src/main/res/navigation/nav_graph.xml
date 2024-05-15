@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress NavigationFile -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="capps.lecturetime.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addLectureFragment"
+            app:destination="@id/addLectureFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_manageLectureFragment"
+            app:destination="@id/manageLectureFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addLectureFragment"
+        android:name="capps.lecturetime.fragments.AddLectureFragment"
+        android:label="fragment_add_lecture"
+        tools:layout="@layout/fragment_add_lecture">
+        <argument
+            android:name="lectureJsonString"
+            app:argType="string"
+            android:defaultValue="null"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/manageLectureFragment"
+        android:name="capps.lecturetime.fragments.ManageLectureFragment"
+        android:label="fragment_manage_lecture"
+        tools:layout="@layout/fragment_manage_lecture" >
+        <action
+            android:id="@+id/action_manageLectureFragment_to_addLectureFragment"
+            app:destination="@id/addLectureFragment"/>
+    </fragment>
+</navigation>
