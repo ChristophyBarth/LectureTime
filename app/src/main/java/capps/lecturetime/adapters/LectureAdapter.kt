@@ -36,16 +36,33 @@ class LectureAdapter(
 
     inner class LectureAdapterViewHolder(private val binding: LectureItemBinding) : ViewHolder(binding.root) {
         fun bind(lecture: Lecture) {
-            binding.courseCode.text = lecture.courseCode
-            binding.courseTitle.text = lecture.courseTitle
+            //Resetting the views because recycled views may have previous view color.
+            binding.apply {
+                root.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
+                courseCode.setTextColor(Color.BLACK)
+                courseTitle.setTextColor(Color.BLACK)
+                courseTime.setTextColor(Color.BLACK)
+                courseDays.setTextColor(Color.BLACK)
+            }
 
-            val startTimeHr = formatTime(lecture.startTime.first)
-            val startTimeMn = formatTime(lecture.startTime.second)
-            val endTimeHr = formatTime(lecture.endTime.first)
-            val endTimeMn = formatTime(lecture.endTime.second)
+            binding.apply {
+                courseCode.text = lecture.courseCode
+                courseTitle.text = lecture.courseTitle
 
-            binding.courseTime.text =
-                context.getString(R.string.course_startTime_to_endTime, startTimeHr, startTimeMn, endTimeHr, endTimeMn)
+                val startTimeHr = formatTime(lecture.startTime.first)
+                val startTimeMn = formatTime(lecture.startTime.second)
+                val endTimeHr = formatTime(lecture.endTime.first)
+                val endTimeMn = formatTime(lecture.endTime.second)
+
+                courseTime.text =
+                    context.getString(
+                        R.string.course_startTime_to_endTime,
+                        startTimeHr,
+                        startTimeMn,
+                        endTimeHr,
+                        endTimeMn
+                    )
+            }
 
             //Check if the lecture is ongoing.
             val startTime = Calendar.getInstance()
