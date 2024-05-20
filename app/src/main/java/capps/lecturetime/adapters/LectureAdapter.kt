@@ -56,7 +56,9 @@ class LectureAdapter(
             endTime.set(Calendar.HOUR_OF_DAY, lecture.endTime.first)
             endTime.set(Calendar.MINUTE, lecture.endTime.second)
 
-            if (System.currentTimeMillis() in startTime.timeInMillis..endTime.timeInMillis) {
+            val now = Calendar.getInstance()
+
+            if (lecture.days.contains(now.get(Calendar.DAY_OF_WEEK)) && System.currentTimeMillis() in startTime.timeInMillis..endTime.timeInMillis) {
                 binding.root.setCardBackgroundColor(ContextCompat.getColor(context, R.color.my_light_primary))
 
                 binding.apply {
